@@ -1,0 +1,467 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Prueba",
+    "version": "1.0.0",
+    "title": "Swagger doc Api",
+    "contact": {
+      "email": "ajpirez1994@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "localhost:5000",
+  "basePath": "/v1/api",
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "User authentication"
+    },
+    {
+      "name": "User",
+      "description": "Everything about users"
+    },
+    {
+      "name": "Rol",
+      "description": "Everything about rols"
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "securityDefinitions": {
+    "basicAuth": {
+      "type": "basic",
+      "description": "HTTP Basic Authentication. Works over `HTTP` and `HTTPS`"
+    }
+  },
+  "paths": {
+    "/auth/signup": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Sign Up",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "User",
+            "in": "body",
+            "type": "string",
+            "description": "name",
+            "required": true,
+            "value": "{\"name\": \"\", \"username\":\"\", \"password\":\"\"}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Invalid tag value"
+          }
+        }
+      }
+    },
+    "/auth/signin": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Sign In",
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Invalid tag value"
+          }
+        }
+      }
+    },
+    "/user": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Finds All the Users",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization token with admin role",
+            "required": true,
+            "type": "string",
+            "value": "Bearer "
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/user/{id}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Find one user",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "User Id",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization token with admin role",
+            "required": true,
+            "type": "string",
+            "value": "Bearer "
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Invalid tag value"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Update one user",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "User Id",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization header fOr JWT",
+            "required": true,
+            "type": "string",
+            "value": "Bearer "
+          },
+          {
+            "name": "User",
+            "in": "body",
+            "type": "string",
+            "description": "Change username and password for your data",
+            "required": true,
+            "value": "{\"name\": \"\", \"username\":\"\", \"password\":\"\"}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Invalid tag value"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Delete one user",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "User Id",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization token with admin role",
+            "required": true,
+            "type": "string",
+            "value": "Bearer "
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Invalid tag value"
+          }
+        }
+      }
+    },
+    "/rol": {
+      "get": {
+        "tags": [
+          "Rol"
+        ],
+        "summary": "Finds All the Rols",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization header with JWT",
+            "required": true,
+            "type": "string",
+            "value": "Bearer "
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Rol"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/rol/{id}": {
+      "get": {
+        "tags": [
+          "Rol"
+        ],
+        "summary": "Find one rol",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "Rol Id",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization header with JWT",
+            "required": true,
+            "type": "string",
+            "value": "Bearer "
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "$ref": "#/definitions/Rol"
+            }
+          },
+          "400": {
+            "description": "Invalid tag value"
+          }
+        }
+      }
+    },
+    "/rol/addRolToUser": {
+      "patch": {
+        "tags": [
+          "Rol"
+        ],
+        "summary": "Add a rol to one user",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Rol",
+            "in": "body",
+            "type": "string",
+            "description": "username",
+            "required": true,
+            "value": "{\"username\": \"\", \"rolName\":\"\"}"
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization header with JWT",
+            "required": true,
+            "type": "string",
+            "value": "Bearer "
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Invalid tag value"
+          }
+        }
+      }
+    },
+    "/rol/deleteRolToUser": {
+      "patch": {
+        "tags": [
+          "Rol"
+        ],
+        "summary": "Delete a rol to one user",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Rol",
+            "in": "body",
+            "type": "string",
+            "description": "username",
+            "required": true,
+            "value": "{\"username\": \"\", \"rolName\":\"\"}"
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization header with JWT",
+            "required": true,
+            "type": "string",
+            "value": "Bearer "
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Invalid tag value"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "rols": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Rol"
+          }
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "Rol": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "UserId": {
+          "type": "integer",
+          "format": "int64",
+          "$ref": "#/definitions/User"
+        }
+      }
+    }
+  }
+}
