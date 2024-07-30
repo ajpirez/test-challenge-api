@@ -53,7 +53,7 @@ class AuthService {
                 id: userExist._id
             };
 
-            const token = "Bearer " + generateToken(userToEncode);
+            const token = generateToken(userToEncode);
 
             return {token, user: userExist};
         } catch (error) {

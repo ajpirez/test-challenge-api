@@ -1,6 +1,10 @@
-const { UserRepository } = require("../../../src/repositories");
-const mockingoose = require("mockingoose").default;
-const { User } = require("../../../src/models");
+const { UserRepository,
+  RolRepository
+} = require("../../../src/repositories");
+const mockingoose = require('mockingoose');
+const { User,
+  Rol
+} = require("../../../src/models");
 let {
   UserModelMock: { users, user }
 } = require("../../mocks");
@@ -41,7 +45,7 @@ describe("User Repository Tests", () => {
 
     const _userRepository = new UserRepository({ User });
     const expected = await _userRepository.getAll();
-    expect(JSON.parse(JSON.stringify(expected))).toMatchObject(users);
+    expect(JSON.parse(JSON.stringify(expected.elements))).toMatchObject(users);
   });
 
   it("Should update an especific user by id", async () => {
@@ -58,8 +62,11 @@ describe("User Repository Tests", () => {
 
   it("Should delete an especific user by id", async () => {
     mockingoose(User).toReturn(user, "findOneAndDelete");
-    const _userRepository = new UserRepository({ User });
-    const expected = await _userRepository.delete(user._id);
-    expect(JSON.parse(JSON.stringify(expected))).toEqual(true);
+    mockingoose(Rol).toReturn({ deletedCount: 1 }, "deleteMany")
+
+    const _userRepository = new UserRepository({ User,Rol });
+    const result = await _userRepository.delete(user._id);
+
+    expect(result).toEqual(true);
   });
 });

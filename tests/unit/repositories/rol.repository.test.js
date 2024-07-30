@@ -1,5 +1,6 @@
 const { RolRepository} = require("../../../src/repositories");
-const mockingoose = require("mockingoose").default;
+const mockingoose = require('mockingoose');
+
 const {User, Rol} = require("../../../src/models");
 let {
     UserModelMock: {users, user}, RolModelMock: {rols, rol}
@@ -24,7 +25,7 @@ describe("rol Repository Tests", () => {
 
         const _rolRepository = new RolRepository({Rol});
         const expected = await _rolRepository.getAll();
-        expect(JSON.parse(JSON.stringify(expected))).toMatchObject(rols);
+        expect(JSON.parse(JSON.stringify(expected.elements))).toMatchObject(rols);
     });
 
     it("Should add a role to one user", async () => {

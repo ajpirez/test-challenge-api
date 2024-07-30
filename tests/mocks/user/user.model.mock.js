@@ -4,6 +4,8 @@ module.exports = {
     firstName: "Alejandro",
     lastName: "pirez",
     email: "ajpirez1994@gmail.com",
+    age: 30,
+    grade: 5,
     password: "mystrongPassword"
   },
   users: [
@@ -12,6 +14,8 @@ module.exports = {
       firstName: "Alejandro",
       lastName: "pirez",
       email: "ajpirez1994@gmail.com",
+      age: 30,
+      grade: 5,
       password: "mystrongPassword"
     },
     {
@@ -19,6 +23,8 @@ module.exports = {
       firstName: "Laura",
       lastName: "Dias",
       email: "laura@gmail.com",
+      age: 24,
+      grade: 3,
       password: "mystrongPassword"
     }
   ]
