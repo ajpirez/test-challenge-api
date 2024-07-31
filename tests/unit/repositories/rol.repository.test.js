@@ -38,7 +38,7 @@ describe("rol Repository Tests", () => {
             .toReturn(rol, "save")
             .toReturn(user, "findOneAndUpdate")
         const _rolRepository = new RolRepository({User, Rol});
-        const expected = await _rolRepository.addRoleToUser(_user.username, 'Client');
+        const expected = await _rolRepository.addRoleToUser(_user.email, 'Client');
         expect(JSON.parse(JSON.stringify(expected._doc))).toMatchObject(_user);
     });
 
@@ -53,7 +53,7 @@ describe("rol Repository Tests", () => {
             .toReturn(user, "findOneAndUpdate")
             .toReturn(rol, "findOneAndDelete")
         const _rolRepository = new RolRepository({User, Rol});
-        const expected = await _rolRepository.deleteRoleToUser(_user.username, _rol.type);
+        const expected = await _rolRepository.deleteRoleToUser(_user.email, _rol.type);
         expect(JSON.parse(JSON.stringify(expected._doc))).toMatchObject(_rol);
     });
 });

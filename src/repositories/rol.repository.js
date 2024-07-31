@@ -9,9 +9,9 @@ class RolRepository extends BaseRepository {
         _user = User;
     }
 
-    async addRoleToUser(username, rolName) {
+    async addRoleToUser(email, rolName) {
         try {
-            const {user, existsRol} = await validation(username, rolName)
+            const {user, existsRol} = await validation(email, rolName)
             if (existsRol) {
                 const error = new Error();
                 error.status = 400;
@@ -30,9 +30,9 @@ class RolRepository extends BaseRepository {
         }
     }
 
-    async deleteRoleToUser(username, rolName, opts = undefined) {
+    async deleteRoleToUser(email, rolName, opts = undefined) {
         try{
-            const {user, existsRol} = await validation(username, rolName)
+            const {user, existsRol} = await validation(email, rolName)
             if (!existsRol) {
                 const error = new Error();
                 error.status = 400;
@@ -49,12 +49,12 @@ class RolRepository extends BaseRepository {
 
 module.exports = RolRepository;
 
-const validation = async (username, rolName) => {
-    let user = await _user.findOne({username});
+const validation = async (email, rolName) => {
+    let user = await _user.findOne({email});
     if (!user) {
         const error = new Error();
         error.status = 400;
-        error.message = "username doesn't exist";
+        error.message = "email doesn't exist";
         throw error;
     }
     let existsRol = await _rol.findOne({UserId: user._id, type: rolName})

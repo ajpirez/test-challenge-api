@@ -33,7 +33,7 @@ describe("Rol Service Tests", () => {
         RolRepository.addRoleToUser.mockReturnValue(user);
 
         const _rolService = new RolService({RolRepository});
-        const expected = await _rolService.repository.addRoleToUser(user.username, rol.type);
+        const expected = await _rolService.repository.addRoleToUser(user.email, rol.type);
         expect(expected).toMatchObject(user);
     });
 
@@ -42,7 +42,7 @@ describe("Rol Service Tests", () => {
         RolRepository.deleteRoleToUser.mockReturnValue(user);
 
         const _rolService = new RolService({RolRepository});
-        const expected = await _rolService.repository.deleteRoleToUser(user.username, rol.type);
+        const expected = await _rolService.repository.deleteRoleToUser(user.email, rol.type);
         expect(expected).toMatchObject(user);
     });
 });

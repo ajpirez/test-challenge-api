@@ -36,13 +36,13 @@ class RolController {
     }
 
     async addRoleToUser(req, res) {
-        const {username, rolName} = req.body;
-        let data = await _rolService.addRoleToUser(username, rolName);
+        const {email, rolName} = req.body;
+        let data = await _rolService.addRoleToUser(email, rolName);
         return res.status(200).json(data)
     }
     async deleteRoleToUser(req,res){
-        const {username, rolName} = req.body;
-        let data = await _rolService.deleteRoleToUser(username, rolName);
+        const {email, rolName} = req.body;
+        let data = await _rolService.deleteRoleToUser(email, rolName);
         return res.status(200).json(data)
     }
 }

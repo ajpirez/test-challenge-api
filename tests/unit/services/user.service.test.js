@@ -18,7 +18,7 @@ describe("User Service Tests", () => {
     expect(expected).toMatchObject(user);
   });
 
-  it("Should find a user by username", async () => {
+  it("Should find a user by email", async () => {
     const UserRepository = UserRepositoryMock;
     UserRepository.getUserByEmail.mockReturnValue(user);
 
@@ -54,4 +54,15 @@ describe("User Service Tests", () => {
     const expected = await _userService.repository.delete(user._id);
     expect(expected).toEqual(true);
   });
+
+  it("Should delete all users by ids", async () => {
+    const UserRepository = UserRepositoryMock;
+    UserRepository.deleteMany.mockReturnValue(true);
+
+    const _userService = new UserService({ UserRepository });
+
+    const expected = await _userService.repository.deleteMany(users.map(user => user._id));
+    expect(expected).toEqual(true);
+  });
+
 });

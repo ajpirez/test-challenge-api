@@ -25,7 +25,7 @@ describe("User Repository Tests", () => {
     expect(JSON.parse(JSON.stringify(expected))).toMatchObject(_user);
   });
 
-  it("Should find a user by username", async () => {
+  it("Should find a user by email", async () => {
     const _user = { ...user };
     delete _user.password;
     mockingoose(User).toReturn(user, "findOne");
@@ -66,6 +66,15 @@ describe("User Repository Tests", () => {
 
     const _userRepository = new UserRepository({ User,Rol });
     const result = await _userRepository.delete(user._id);
+
+    expect(result).toEqual(true);
+  });
+
+  it("Should delete all the users by id", async () => {
+    mockingoose(User).toReturn(user, "deleteMany");
+
+    const _userRepository = new UserRepository({ User,Rol });
+    const result = await _userRepository.deleteMany(users.map(user => user._id));
 
     expect(result).toEqual(true);
   });

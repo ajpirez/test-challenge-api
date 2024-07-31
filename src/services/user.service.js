@@ -7,9 +7,9 @@ class UserService extends BaseService {
         _userRepository = UserRepository;
     }
 
-    async getUserByEmail(username) {
+    async getUserByEmail(email) {
         try {
-            return await _userRepository.getUserByEmail(username);
+            return await _userRepository.getUserByEmail(email);
         } catch (error) {
             throw error
         }
