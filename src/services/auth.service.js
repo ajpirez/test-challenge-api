@@ -44,7 +44,7 @@ class AuthService {
             if (!validPassword) {
                 const error = new Error();
                 error.status = 400;
-                error.message = "Invalid Password";
+                error.message = "Invalid Credentials";
                 throw error;
             }
 

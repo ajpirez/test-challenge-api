@@ -36,13 +36,24 @@ class BaseRepository {
     }
 
     async update(id, entity, opts = undefined) {
-        return this.model.findByIdAndUpdate(id, entity, {new: true, opts});
+        return this.model.findByIdAndUpdate(id, entity, {
+            new: true,
+            opts
+        });
     }
 
     async delete(id) {
-        const result = await this.model.findOneAndDelete({ _id: id });
+        const result = await this.model.findOneAndDelete({_id: id});
         if (!result) {
             throw new Error('Document not found');
+        }
+        return true;
+    }
+
+    async deleteMany(ids) {
+        const result = await this.model.deleteMany({_id: {$in: ids}});
+        if (result.deletedCount === 0) {
+            throw new Error('No documents found to delete');
         }
         return true;
     }

@@ -12,7 +12,10 @@ class UserController {
     }
 
     async getAll(req, res) {
-        const {limit, page} = req.query;
+        const {
+            limit,
+            page
+        } = req.query;
         const users = await _userService.getAll(limit, page);
         return res.send(users);
     }
@@ -25,11 +28,20 @@ class UserController {
 
     async delete(req, res) {
         const {userId} = req.params;
-        if( userId === req.user.id){
+        if (userId === req.user.id) {
             throw new Error("You can't delete yourself.");
         }
         const deletedUser = await _userService.delete(userId);
         return res.send(deletedUser);
+    }
+
+    async deleteMany(req, res) {
+        const {ids} = req.body
+        if (!ids.length) {
+            throw new Error("The ids needs to be an array.");
+        }
+        const deletedUsers = await _userService.deleteMany(ids)
+        return res.send(deletedUsers)
     }
 }
 

@@ -46,6 +46,17 @@ class BaseService {
 
         return this.repository.delete(id);
     }
+
+    async deleteMany(ids) {
+        if (!ids.length) {
+            const error = new Error();
+            error.status = 400;
+            error.message = "ids must be sent";
+            throw error;
+        }
+
+        return this.repository.deleteMany(ids);
+    }
 }
 
 module.exports = BaseService;

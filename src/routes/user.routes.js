@@ -2,7 +2,6 @@ const {Router} = require("express");
 const {
     AuthMiddleware,
     ParseIntMiddleware,
-    RolMiddleware,
     ValidateData
 } = require("../middlewares");
 
@@ -12,10 +11,11 @@ module.exports = function ({
 }) {
     const router = Router();
 
-    router.get("", AuthMiddleware, RolMiddleware.ensureHasRol('Admin'), [ParseIntMiddleware], UserController.getAll);
+    router.get("", AuthMiddleware,  [ParseIntMiddleware], UserController.getAll);
     router.get("/:userId", AuthMiddleware, UserController.get);
     router.patch("/:userId", AuthMiddleware, ValidateData(UserUpdateSchema), UserController.update);
     router.delete("/:userId", AuthMiddleware, UserController.delete);
+    router.post("/delete-ids", AuthMiddleware, UserController.deleteMany);
 
     return router;
 };
