@@ -32,12 +32,6 @@
     "http",
     "https"
   ],
-  "securityDefinitions": {
-    "basicAuth": {
-      "type": "basic",
-      "description": "HTTP Basic Authentication. Works over `HTTP` and `HTTPS`"
-    }
-  },
   "paths": {
     "/auth/signup": {
       "post": {
@@ -56,7 +50,7 @@
             "type": "string",
             "description": "name",
             "required": true,
-            "value": "{\"name\": \"\", \"username\":\"\", \"password\":\"\"}"
+            "value": "{\"name\": \"\", \"email\":\"\", \"password\":\"\"}"
           }
         ],
         "responses": {
@@ -82,6 +76,16 @@
         "security": [
           {
             "basicAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "User",
+            "in": "body",
+            "type": "string",
+            "description": "name",
+            "required": true,
+            "value": "{\"email\":\"\", \"password\":\"\"}"
           }
         ],
         "responses": {
@@ -203,9 +207,9 @@
             "name": "User",
             "in": "body",
             "type": "string",
-            "description": "Change username and password for your data",
+            "description": "Change email and password for your data",
             "required": true,
-            "value": "{\"name\": \"\", \"username\":\"\", \"password\":\"\"}"
+            "value": "{\"name\": \"\", \"email\":\"\", \"password\":\"\"}"
           }
         ],
         "responses": {
@@ -353,9 +357,9 @@
             "name": "Rol",
             "in": "body",
             "type": "string",
-            "description": "username",
+            "description": "email",
             "required": true,
-            "value": "{\"username\": \"\", \"rolName\":\"\"}"
+            "value": "{\"email\": \"\", \"rolName\":\"\"}"
           },
           {
             "in": "header",
@@ -395,9 +399,9 @@
             "name": "Rol",
             "in": "body",
             "type": "string",
-            "description": "username",
+            "description": "email",
             "required": true,
-            "value": "{\"username\": \"\", \"rolName\":\"\"}"
+            "value": "{\"email\": \"\", \"rolName\":\"\"}"
           },
           {
             "in": "header",
@@ -439,7 +443,7 @@
         "name": {
           "type": "string"
         },
-        "username": {
+        "email": {
           "type": "string"
         },
         "password": {
