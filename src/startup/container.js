@@ -44,7 +44,8 @@ const {
     UserSchema,
     RolSchema,
     AuthSchema,
-    UserUpdateSchema
+    UserUpdateSchema,
+    UserDeleteAllSchema
 } = require('../schemas/index')
 
 // repositories
@@ -85,7 +86,8 @@ container
         UserSchema: asValue(UserSchema),
         UserUpdateSchema: asValue(UserUpdateSchema),
         RolSchema: asValue(RolSchema),
-        AuthSchema: asValue(AuthSchema)
+        AuthSchema: asValue(AuthSchema),
+        UserDeleteAllSchema: asValue(UserDeleteAllSchema)
     })
     .register({
         UserRepository: asClass(UserRepository).singleton(),

@@ -7,7 +7,8 @@ const {
 
 module.exports = function ({
     UserController,
-    UserUpdateSchema
+    UserUpdateSchema,
+    UserDeleteAllSchema
 }) {
     const router = Router();
 
@@ -15,7 +16,7 @@ module.exports = function ({
     router.get("/:userId", AuthMiddleware, UserController.get);
     router.patch("/:userId", AuthMiddleware, ValidateData(UserUpdateSchema), UserController.update);
     router.delete("/:userId", AuthMiddleware, UserController.delete);
-    router.post("/delete-ids", AuthMiddleware, UserController.deleteMany);
+    router.post("/delete-ids", AuthMiddleware,ValidateData(UserDeleteAllSchema), UserController.deleteMany);
 
     return router;
 };
