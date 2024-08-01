@@ -2,7 +2,7 @@ const Joi = require('@hapi/joi')
 
 const schema = Joi.object({
     firstName: Joi.string().min(3),
-    lastName: Joi.string().min(3),
+    lastName: Joi.string().min(3).allow(''),
     email: Joi.string().min(3),
     password: Joi.string().min(3),
     age: Joi.number().min(6),
